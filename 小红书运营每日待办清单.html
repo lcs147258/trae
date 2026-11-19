@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>小红书运营每日待办清单</title>
+<style>
+  :root{
+    --red:#ff2e4d;
+    --red-dark:#e01f3d;
+    --red-soft:#fff0f2;
+    --ink:#1f2329;
+    --ink-2:#4e5561;
+    --ink-3:#8a929e;
+    --line:#eee6e4;
+    --bg:#fdf8f6;
+    --card:#ffffff;
+    --green:#17a673;
+    --amber:#f59e0b;
+    --radius:16px;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(1200px 500px at 80% -100px, #ffe6ea 0%, rgba(255,230,234,0) 60%),
+      radial-gradient(900px 400px at -10% 0%, #fff1e6 0%, rgba(255,241,230,0) 55%),
+      var(--bg);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",sans-serif;
+    line-height:1.6;
+  }
+  .page{max-width:960px;margin:0 auto;padding:40px 20px 72px;}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    background:linear-gradient(135deg,#ffffff 0%,#fffaf8 100%);
+    border:1px solid var(--line);
+    border-radius:24px;
+    padding:30px 32px 26px;
+    box-shadow:0 18px 50px -28px rgba(214,62,84,.35);
+  }
+  .hero-top{display:flex;gap:28px;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;}
+  .eyebrow{
+    margin:0 0 8px;font-size:12px;letter-spacing:.14em;font-weight:600;
+    color:var(--red);text-transform:uppercase;
+  }
+  h1{margin:0;font-size:30px;line-height:1.25;letter-spacing:-.01em;}
+  .date{margin:8px 0 0;color:var(--ink-3);font-size:14px;}
+  .progress-box{min-width:210px;flex:0 0 auto;}
+  .progress-label{display:flex;align-items:baseline;gap:4px;font-size:13px;color:var(--ink-2);}
+  .progress-label b{font-size:26px;line-height:1;color:var(--red);}
+  .bar{height:8px;border-radius:99px;background:#f1e6e4;overflow:hidden;margin-top:10px;}
+  .bar i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,#ff7a8c,#ff2e4d);transition:width .35s ease;}
+  .targets{
+    margin-top:24px;padding-top:22px;border-top:1px dashed var(--line);
+    display:grid;grid-template-columns:repeat(4,1fr);gap:14px;
+  }
+  .target{background:#fff7f8;border:1px solid #ffe3e7;border-radius:12px;padding:12px 14px;}
+  .target .num{display:block;font-size:22px;font-weight:700;color:var(--red-dark);line-height:1.2;}
+  .target span:last-child{display:block;font-size:12px;color:var(--ink-3);margin-top:2px;}
+
+  /* ---------- Toolbar ---------- */
+  .toolbar{
+    display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;
+    margin:18px 2px 16px;
+  }
+  button{
+    font:inherit;font-size:13px;font-weight:600;cursor:pointer;
+    border-radius:999px;padding:8px 16px;border:1px solid var(--line);
+    background:#fff;color:var(--ink-2);transition:.18s;
+  }
+  button:hover{border-color:#ffc9d1;color:var(--red-dark);background:#fff7f8;}
+  button.solid{background:var(--red);border-color:var(--red);color:#fff;}
+  button.solid:hover{background:var(--red-dark);color:#fff;}
+
+  /* ---------- Cards ---------- */
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:22px 24px;margin-bottom:16px;
+    box-shadow:0 10px 30px -26px rgba(40,30,30,.4);
+    break-inside:avoid;page-break-inside:avoid;
+  }
+  .card-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px;}
+  .time{
+    display:inline-flex;align-items:center;gap:6px;
+    font-size:12px;font-weight:700;letter-spacing:.02em;
+    color:var(--red-dark);background:var(--red-soft);
+    padding:4px 10px;border-radius:999px;white-space:nowrap;
+  }
+  .card-head h2{margin:0;font-size:17px;font-weight:700;letter-spacing:-.01em;}
+  .counter{margin-left:auto;font-size:12px;color:var(--ink-3);white-space:nowrap;}
+  .counter b{color:var(--green);}
+  .card-note{margin:10px 0 0;font-size:12.5px;color:var(--ink-3);padding-left:2px;}
+  .card-note b{color:var(--ink-2);}
+  .optional-tag{
+    font-size:11px;font-weight:600;color:#b07a10;background:#fff5df;
+    padding:2px 8px;border-radius:999px;
+  }
+
+  /* ---------- Tasks ---------- */
+  ul.tasks{list-style:none;margin:12px 0 0;padding:0;}
+  ul.tasks li{border-top:1px solid #f5efed;}
+  ul.tasks li:first-child{border-top:none;}
+  ul.tasks label{
+    display:flex;gap:12px;align-items:flex-start;
+    padding:11px 4px 11px 0;cursor:pointer;border-radius:8px;
+  }
+  ul.tasks label:hover .text{color:var(--red-dark);}
+  input[type="checkbox"]{
+    appearance:none;-webkit-appearance:none;
+    flex:0 0 auto;width:20px;height:20px;margin:2px 0 0;
+    border:2px solid #d9d2d0;border-radius:6px;background:#fff;
+    cursor:pointer;position:relative;transition:.16s;
+  }
+  input[type="checkbox"]:hover{border-color:var(--red);}
+  input[type="checkbox"]:checked{background:var(--red);border-color:var(--red);}
+  input[type="checkbox"]:checked::after{
+    content:"";position:absolute;left:5px;top:1px;width:6px;height:11px;
+    border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(43deg);
+  }
+  input[type="checkbox"]:checked + .text{text-decoration:line-through;color:#b3b8c0;}
+  .text{font-size:14.5px;color:var(--ink);transition:.16s;}
+  .text small{display:block;font-size:12.5px;color:var(--ink-3);margin-top:3px;line-height:1.5;text-decoration:none;}
+  input[type="checkbox"]:checked + .text small{color:#c6cad0;}
+
+  /* ---------- Data log ---------- */
+  .log-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px;}
+  .log-item{background:#fbf8f7;border:1px solid #f0e9e7;border-radius:12px;padding:12px 14px;}
+  .log-item label{display:block;font-size:12px;color:var(--ink-3);margin-bottom:6px;}
+  .log-item input{
+    width:100%;border:none;background:transparent;outline:none;
+    font:inherit;font-size:22px;font-weight:700;color:var(--ink);padding:0;
+  }
+  .log-item input::placeholder{color:#d5cdcb;font-weight:600;font-size:18px;}
+
+  /* ---------- Weekly ---------- */
+  .card.weekly{background:linear-gradient(150deg,#fffdf6,#fff);border-color:#f3e8cc;}
+  .card.weekly .time{color:#a06a00;background:#fff4d8;}
+
+  /* ---------- Scripts ---------- */
+  details.scripts{
+    background:#fbfbfc;border:1px solid var(--line);border-radius:var(--radius);
+    padding:0;margin-bottom:16px;overflow:hidden;
+  }
+  details.scripts summary{
+    cursor:pointer;list-style:none;padding:18px 24px;font-weight:700;font-size:15px;
+    display:flex;align-items:center;gap:10px;
+  }
+  details.scripts summary::-webkit-details-marker{display:none;}
+  details.scripts summary::after{content:"+";margin-left:auto;color:var(--red);font-size:20px;font-weight:400;}
+  details.scripts[open] summary::after{content:"–";}
+  .script-body{padding:0 24px 20px;}
+  .script-item{border-top:1px dashed #ece6e4;padding:12px 0;}
+  .script-item:first-child{border-top:none;padding-top:0;}
+  .script-item h4{margin:0 0 4px;font-size:13px;color:var(--red-dark);}
+  .script-item p{margin:0;font-size:13.5px;color:var(--ink-2);}
+  .script-item p + p{margin-top:4px;}
+
+  /* ---------- Footer ---------- */
+  .foot{margin-top:28px;text-align:center;font-size:12px;color:var(--ink-3);}
+  .foot b{color:var(--ink-2);}
+
+  @media (max-width:720px){
+    .page{padding:20px 12px 48px;}
+    .hero{padding:22px 20px 20px;border-radius:20px;}
+    h1{font-size:24px;}
+    .progress-box{width:100%;}
+    .targets{grid-template-columns:repeat(2,1fr);gap:10px;}
+    .target .num{font-size:20px;}
+    .card{padding:18px 16px;}
+    .log-grid{grid-template-columns:repeat(2,1fr);}
+    .counter{display:none;}
+  }
+
+  @media print{
+    @page{margin:14mm 12mm;}
+    body{background:#fff;}
+    .page{max-width:100%;padding:0;}
+    .toolbar{display:none;}
+    .hero{box-shadow:none;border-color:#ddd;padding:18px 20px;}
+    .card{box-shadow:none;border-color:#ddd;padding:14px 16px;margin-bottom:10px;}
+    .target{background:#fafafa;border-color:#e5e5e5;}
+    details.scripts{display:none;}
+    input[type="checkbox"]{border-color:#999;}
+    .bar i{background:#e01f3d;}
+    ul.tasks label{padding:7px 0;}
+    .text{font-size:13px;}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="hero">
+    <div class="hero-top">
+      <div>
+        <p class="eyebrow">UK 留学租房 · 前端获客</p>
+        <h1>小红书运营每日待办</h1>
+        <p class="date" id="dateText"></p>
+      </div>
+      <div class="progress-box" aria-live="polite">
+        <div class="progress-label">今日完成 <b id="doneCount">0</b>/<span id="totalCount">0</span></div>
+        <div class="bar"><i id="barFill"></i></div>
+      </div>
+    </div>
+    <div class="targets">
+      <div class="target"><span class="num">≥ 8</span><span>今日拉群数</span></div>
+      <div class="target"><span class="num">40–50</span><span>每日私信量</span></div>
+      <div class="target"><span class="num">16:00</span><span>前完成投流登记</span></div>
+      <div class="target"><span class="num">18:00</span><span>质检截止</span></div>
+    </div>
+  </header>
+
+  <div class="toolbar">
+    <button id="resetWeeklyBtn">重置本周回访</button>
+    <button id="resetBtn">重置今日清单</button>
+    <button id="printBtn" class="solid">打印 / 导出 PDF</button>
+  </div>
+
+  <main>
+
+    <!-- 10:00-15:00 -->
+    <section class="card daily" data-counter>
+      <div class="card-head">
+        <span class="time">10:00 – 15:00</span>
+        <h2>内容编辑与准备工作</h2>
+        <span class="counter"><b>0</b>/5</span>
+      </div>
+      <ul class="tasks">
+        <li><label><input type="checkbox" data-id="d-edit"><span class="text">编辑当日软文 / 硬文，保持「两篇硬文 + 一篇软文」节奏</span></label></li>
+        <li><label><input type="checkbox" data-id="d-yanghao"><span class="text">发布养号贴：以英国城市为维度，选留学生关注或有争议的话题<small>目的：提升账号曝光。新号起号、硬文后流量下滑时，尤其要发。</small></span></label></li>
+        <li><label><input type="checkbox" data-id="d-xinsheng"><span class="text">素人号发布新生贴</span></label></li>
+        <li><label><input type="checkbox" data-id="d-carry"><span class="text">处理前一天未完成的工作</span></label></li>
+        <li><label><input type="checkbox" data-id="d-am-dm"><span class="text">少量精准私信（此时间段英国学生在休息，国内学生在上课 / 上班）<small>除非刷到特别精准的客户，否则不大量发。</small></span></label></li>
+      </ul>
+    </section>
+
+    <!-- 15:00 后 -->
+    <section class="card daily" data-counter>
+      <div class="card-head">
+        <span class="time">15:00 后</span>
+        <h2>找流截流</h2>
+        <span class="counter"><b>0</b>/6</span>
+      </div>
+      <ul class="tasks">
+        <li><label><input type="checkbox" data-id="d-timeliness"><span class="text">筛选时效性强的帖子和评论<small>学生发帖 / 评论时间越接近现在越合适。</small></span></label></li>
+        <li><label><input type="checkbox" data-id="d-peer"><span class="text">甄别同行帖，避免无效私信<small>看 IP 是否跳动（疑似梯子）、主页发帖内容、IP 位置（河南 / 河北 / 天津 / 广东同行较多）。</small></span></label></li>
+        <li><label><input type="checkbox" data-id="d-match"><span class="text">确认真实需求与匹配度：租期、预算、位置</span></label></li>
+        <li><label><input type="checkbox" data-id="d-comment"><span class="text">在别人求租帖下留评低价房源，引导主动来问</span></label></li>
+        <li><label><input type="checkbox" data-id="d-jieliu"><span class="text">按帖子需求针对性私信截流</span></label></li>
+        <li><label><input type="checkbox" data-id="d-limit"><span class="text">控制私信总量：素人号 ≤ 10 条 / 天，KOS ≤ 20 条 / 天<small>节奏放慢、认真筛选，保证每条私信真实有用。</small></span></label></li>
+      </ul>
+    </section>
+
+    <!-- 16:00 前 -->
+    <section class="card daily" data-counter>
+      <div class="card-head">
+        <span class="time">16:00 前</span>
+        <h2>房源贴投流登记</h2>
+        <span class="counter"><b>0</b>/2</span>
+      </div>
+      <ul class="tasks">
+        <li><label><input type="checkbox" data-id="d-touliu-check"><span class="text">检查笔记是否达到投流标准：浏览量 ≥ 100、互动量 ≥ 7</span></label></li>
+        <li><label><input type="checkbox" data-id="d-touliu-log"><span class="text">符合标准的笔记，16:00 前在后台登记上传<small>入口：app.uhomes.com/xhs-promotion/#notes</small></span></label></li>
+      </ul>
+    </section>
+
+    <!-- 客户运营 -->
+    <section class="card daily" data-counter>
+      <div class="card-head">
+        <span class="time">当天</span>
+        <h2>客户运营与拉群</h2>
+        <span class="counter"><b>0</b>/7</span>
+      </div>
+      <ul class="tasks">
+        <li><label><input type="checkbox" data-id="d-tag"><span class="text">新客户加备注 + 标签：明确需求与入学时间<small>暂无租房需求的客户，必须备注「暂无租房需求」，便于质检同事介入。</small></span></label></li>
+        <li><label><input type="checkbox" data-id="d-crm"><span class="text">当天添加的客户当天录入 CRM<small>路径：企微工作台 → CRM → Uhomes Pro (AI) → 商机分给谁；当天录入便于核对每日数据。</small></span></label></li>
+        <li><label><input type="checkbox" data-id="d-assign"><span class="text">拉群分配：正常租期 / 预算优先走「商机分配」<small>系统按 AI 合理公平分配并自动录入。特殊需求、短租、低预算、不确定有无房的客户，走喊单群，群内首次扣 1 者拉群。</small></span></label></li>
+        <li><label><input type="checkbox" data-id="d-manager"><span class="text">普通顾问拉群时拉上对应主管；主管本人无需再拉上级<small>伦敦主管：薄东明、董旭鹏、金博、王海龙（非伦敦也可接）；非伦敦主管：郭之琳。</small></span></label></li>
+        <li><label><input type="checkbox" data-id="d-sync"><span class="text">拉群后把与学生的聊天记录、需求同步给顾问，并 @ 学生和顾问<small>先帮顾问立住专业靠谱人设，便于群内破冰开聊；引导学关注群聊消息。</small></span></label></li>
+        <li><label><input type="checkbox" data-id="d-kos-reply"><span class="text">KOS 互动：硬文帖子下学生留评及时回复</span></label></li>
+        <li><label><input type="checkbox" data-id="d-kos-active"><span class="text">主动私信点赞、收藏帖子的陌生用户，咨询租房意向</span></label></li>
+      </ul>
+    </section>
+
+    <!-- 18:00 质检 -->
+    <section class="card daily" data-counter>
+      <div class="card-head">
+        <span class="time">18:00</span>
+        <h2>质检前收尾</h2>
+        <span class="counter"><b>0</b>/4</span>
+      </div>
+      <ul class="tasks">
+        <li><label><input type="checkbox" data-id="d-before18"><span class="text">所有工作动作在 18:00 前完成（18:00 后为质检时间）</span></label></li>
+        <li><label><input type="checkbox" data-id="d-check-group"><span class="text">核对今日拉群数量 ≥ 8 个</span></label></li>
+        <li><label><input type="checkbox" data-id="d-check-dm"><span class="text">核对私信量是否达到 40–50 条（按个人拉群情况调整）</span></label></li>
+        <li><label><input type="checkbox" data-id="d-check-crm"><span class="text">核对 CRM 录入、投流登记无遗漏</span></label></li>
+      </ul>
+    </section>
+
+    <!-- 晚间机动 -->
+    <section class="card daily optional" data-counter data-optional="true">
+      <div class="card-head">
+        <span class="time">22:30 – 01:00</span>
+        <h2>晚间机动截流</h2>
+        <span class="optional-tag">可选 · 不计入进度</span>
+        <span class="counter"><b>0</b>/3</span>
+      </div>
+      <p class="card-note">晚间是小红书客户活跃度最高的时段，也是加好友概率最高的时候。</p>
+      <ul class="tasks">
+        <li><label><input type="checkbox" data-id="d-night-keep"><span class="text">预留部分私信条数用于晚间截流</span></label></li>
+        <li><label><input type="checkbox" data-id="d-night-post"><span class="text">关注英国下午时段（学生空闲、刷小红书较多）的帖子</span></label></li>
+        <li><label><input type="checkbox" data-id="d-night-wechat"><span class="text">朋友圈更新最新房源与优惠信息，承接 27fall 咨询</span></label></li>
+      </ul>
+    </section>
+
+    <!-- 今日数据 -->
+    <section class="card">
+      <div class="card-head">
+        <span class="time">今日数据</span>
+        <h2>自查记录</h2>
+      </div>
+      <div class="log-grid">
+        <div class="log-item"><label>拉群数（目标 ≥ 8）</label><input type="number" inputmode="numeric" min="0" placeholder="0" data-log="groups"></div>
+        <div class="log-item"><label>私信数（目标 40–50）</label><input type="number" inputmode="numeric" min="0" placeholder="0" data-log="dms"></div>
+        <div class="log-item"><label>投流登记（篇）</label><input type="number" inputmode="numeric" min="0" placeholder="0" data-log="promote"></div>
+        <div class="log-item"><label>CRM 录入（人）</label><input type="number" inputmode="numeric" min="0" placeholder="0" data-log="crm"></div>
+      </div>
+    </section>
+
+    <!-- 每周一 -->
+    <section class="card weekly" data-weekly>
+      <div class="card-head">
+        <span class="time">每周一</span>
+        <h2>客户大回访</h2>
+        <span class="counter"><b>0</b>/4</span>
+      </div>
+      <p class="card-note">按标签（以城市、学校维度）群发大回访，与客户保持粘连度，持续挖掘租房需求。</p>
+      <ul class="tasks">
+        <li><label><input type="checkbox" data-id="w-tags"><span class="text">建立并整理客户标签，按城市 / 学校筛选</span></label></li>
+        <li><label><input type="checkbox" data-id="w-broadcast"><span class="text">按标签群发每周大回访</span></label></li>
+        <li><label><input type="checkbox" data-id="w-content"><span class="text">回访内容覆盖：热门房源推荐 / 拼室友 / 活动策划 / 询问租房需求</span></label></li>
+        <li><label><input type="checkbox" data-id="w-follow"><span class="text">检查顾问漏回、忘回情况，截图提醒跟进；长期沉默客户自己私发询问</span></label></li>
+      </ul>
+    </section>
+
+    <!-- 话术速查 -->
+    <details class="scripts">
+      <summary>话术速查（私信 / 留评 / 拉群同步）</summary>
+      <div class="script-body">
+        <div class="script-item">
+          <h4>27fall 私信开场</h4>
+          <p>“27fall 的宝子～新一年房源快开放了，现在有早鸟价，需要的话我拉你进 XX 学校组织 / 租房群，朋友圈会更新最新房源和优惠。”</p>
+        </div>
+        <div class="script-item">
+          <h4>新生进组织</h4>
+          <p>“27fall XX 学校组织要来吗？可以找找搭子，不懂的问问学姐～”</p>
+          <p>“XX 组织要进下吗？我拉你进，里面有同专业的同学。”</p>
+        </div>
+        <div class="script-item">
+          <h4>留评引流</h4>
+          <p>在别人求租帖下留评低价房源信息，引导学生主动来问；也可截群列表 / 群内聊天截图，私信用户主动邀请进组织。</p>
+        </div>
+        <div class="script-item">
+          <h4>截流私信</h4>
+          <p>根据对方帖子内容与需求针对性私信，先确认真实需求、租期、预算、位置，再引导进群或加顾问。</p>
+        </div>
+        <div class="script-item">
+          <h4>拉群后同步顾问</h4>
+          <p>把与学生聊天记录、需求同步给顾问，并 @ 学生和顾问：“同学需求：XX 学校 / 租期 / 预算 / 位置，麻烦顾问老师跟进～”</p>
+        </div>
+      </div>
+    </details>
+
+    <!-- 提醒 -->
+    <section class="card">
+      <div class="card-head"><span class="time">提醒</span><h2>今日红线</h2></div>
+      <ul class="tasks">
+        <li><label><input type="checkbox" data-id="r-18"><span class="text">18:00 后进入质检，所有动作须在 18:00 前完成</span></label></li>
+        <li><label><input type="checkbox" data-id="r-limit"><span class="text">私信不超上限：素人号 10 条 / 天，KOS 20 条 / 天</span></label></li>
+        <li><label><input type="checkbox" data-id="r-crm"><span class="text">当天客户必须当天录入 CRM</span></label></li>
+        <li><label><input type="checkbox" data-id="r-workphone"><span class="text">截流号提前备足，工作机不够及时沟通</span></label></li>
+      </ul>
+      <p class="card-note">晚上 1 点前喊单群一般都有顾问在线，运营只管大胆获客，后续房源推荐由专人负责。</p>
+    </section>
+
+  </main>
+
+  <p class="foot">根据《小红书运营日常 To Do》整理 · 勾选状态自动保存在本机浏览器 · <b>每日自动重置</b></p>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var DAILY_PREFIX = "xhs-todo-daily-";
+  var WEEKLY_PREFIX = "xhs-todo-weekly-";
+  var LOG_PREFIX = "xhs-todo-log-";
+
+  function pad(n){ return n < 10 ? "0" + n : "" + n; }
+
+  function todayKey(){
+    var now = new Date();
+    try{
+      var parts = new Intl.DateTimeFormat("zh-CN", {
+        timeZone: "Asia/Shanghai", year: "numeric", month: "2-digit", day: "2-digit"
+      }).formatToParts(now);
+      var map = {};
+      parts.forEach(function(p){ map[p.type] = p.value; });
+      return map.year + "-" + map.month + "-" + map.day;
+    }catch(e){
+      return now.getFullYear() + "-" + pad(now.getMonth() + 1) + "-" + pad(now.getDate());
+    }
+  }
+
+  function isoWeekKey(){
+    var d = new Date();
+    var target = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+    var dayNum = target.getUTCDay() || 7;
+    target.setUTCDate(target.getUTCDate() + 4 - dayNum);
+    var yearStart = new Date(Date.UTC(target.getUTCFullYear(), 0, 1));
+    var week = Math.ceil(((target - yearStart) / 86400000 + 1) / 7);
+    return target.getUTCFullYear() + "-W" + pad(week);
+  }
+
+  var dailyKey = DAILY_PREFIX + todayKey();
+  var weeklyKey = WEEKLY_PREFIX + isoWeekKey();
+  var logKey = LOG_PREFIX + todayKey();
+
+  function read(key){
+    try{ return JSON.parse(localStorage.getItem(key) || "{}"); }
+    catch(e){ return {}; }
+  }
+  function write(key, obj){
+    try{ localStorage.setItem(key, JSON.stringify(obj)); }catch(e){}
+  }
+
+  // 日期显示
+  var dateEl = document.getElementById("dateText");
+  try{
+    dateEl.textContent = new Intl.DateTimeFormat("zh-CN", {
+      timeZone: "Asia/Shanghai", year: "numeric", month: "long", day: "numeric", weekday: "long"
+    }).format(new Date()) + " · 每日执行版";
+  }catch(e){
+    dateEl.textContent = todayKey();
+  }
+
+  var dailyBoxes = Array.prototype.slice.call(
+    document.querySelectorAll("section.card.daily input[type=checkbox]")
+  );
+  var weeklyBoxes = Array.prototype.slice.call(
+    document.querySelectorAll("section.card.weekly input[type=checkbox]")
+  );
+  var allBoxes = Array.prototype.slice.call(document.querySelectorAll("input[type=checkbox]"));
+
+  // 恢复勾选
+  var dailyState = read(dailyKey);
+  var weeklyState = read(weeklyKey);
+  dailyBoxes.forEach(function(box){
+    if(dailyState[box.dataset.id]) box.checked = true;
+  });
+  weeklyBoxes.forEach(function(box){
+    if(weeklyState[box.dataset.id]) box.checked = true;
+  });
+
+  // 进度：已完成的每日任务（可选板块不计入）
+  var doneEl = document.getElementById("doneCount");
+  var totalEl = document.getElementById("totalCount");
+  var fillEl = document.getElementById("barFill");
+
+  function updateProgress(){
+    var total = 0, done = 0;
+    dailyBoxes.forEach(function(box){
+      var section = box.closest("section");
+      if(section && section.getAttribute("data-optional") === "true") return;
+      total++;
+      if(box.checked) done++;
+    });
+    doneEl.textContent = done;
+    totalEl.textContent = total;
+    fillEl.style.width = total ? (done / total * 100) + "%" : "0%";
+  }
+
+  // 各板块计数
+  function updateCounters(){
+    document.querySelectorAll("section.card").forEach(function(sec){
+      var boxes = sec.querySelectorAll("input[type=checkbox]");
+      if(!boxes.length) return;
+      var counter = sec.querySelector(".counter");
+      if(!counter) return;
+      var checked = 0;
+      boxes.forEach(function(b){ if(b.checked) checked++; });
+      counter.innerHTML = "<b>" + checked + "</b>/" + boxes.length;
+      counter.querySelector("b").style.color = checked === boxes.length ? "var(--green)" : "";
+    });
+  }
+
+  function refresh(){
+    updateProgress();
+    updateCounters();
+  }
+
+  dailyBoxes.forEach(function(box){
+    box.addEventListener("change", function(){
+      var state = read(dailyKey);
+      if(box.checked) state[box.dataset.id] = 1; else delete state[box.dataset.id];
+      write(dailyKey, state);
+      refresh();
+    });
+  });
+
+  weeklyBoxes.forEach(function(box){
+    box.addEventListener("change", function(){
+      var state = read(weeklyKey);
+      if(box.checked) state[box.dataset.id] = 1; else delete state[box.dataset.id];
+      write(weeklyKey, state);
+      refresh();
+    });
+  });
+
+  // 今日数据
+  var logState = read(logKey);
+  document.querySelectorAll("[data-log]").forEach(function(input){
+    var key = input.dataset.log;
+    if(logState[key] !== undefined) input.value = logState[key];
+    input.addEventListener("input", function(){
+      var state = read(logKey);
+      state[key] = input.value;
+      write(logKey, state);
+    });
+  });
+
+  // 重置今日
+  document.getElementById("resetBtn").addEventListener("click", function(){
+    if(!confirm("确定重置今日所有勾选和自查数据吗？")) return;
+    dailyBoxes.forEach(function(box){ box.checked = false; });
+    write(dailyKey, {});
+    document.querySelectorAll("[data-log]").forEach(function(input){ input.value = ""; });
+    write(logKey, {});
+    refresh();
+  });
+
+  // 重置本周
+  document.getElementById("resetWeeklyBtn").addEventListener("click", function(){
+    if(!confirm("确定重置本周回访勾选吗？")) return;
+    weeklyBoxes.forEach(function(box){ box.checked = false; });
+    write(weeklyKey, {});
+    refresh();
+  });
+
+  document.getElementById("printBtn").addEventListener("click", function(){ window.print(); });
+
+  refresh();
+})();
+</script>
+</body>
+</html>
