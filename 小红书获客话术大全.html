@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>小红书获客话术大全 · 需求点前置</title>
+<style>
+  :root{
+    --red:#ff2e4d;
+    --red-dark:#e01f3d;
+    --red-soft:#fff0f2;
+    --ink:#1f2329;
+    --ink-2:#4e5561;
+    --ink-3:#8a929e;
+    --line:#eee6e4;
+    --bg:#fdf8f6;
+    --card:#ffffff;
+    --green:#17a673;
+    --green-soft:#eafaf3;
+    --amber:#b07a10;
+    --amber-soft:#fff5df;
+    --radius:16px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(1200px 500px at 80% -100px, #ffe6ea 0%, rgba(255,230,234,0) 60%),
+      radial-gradient(900px 400px at -10% 0%, #fff1e6 0%, rgba(255,241,230,0) 55%),
+      var(--bg);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",sans-serif;
+    line-height:1.7;
+  }
+  .page{max-width:980px;margin:0 auto;padding:40px 20px 80px;}
+
+  /* Hero */
+  .hero{
+    background:linear-gradient(135deg,#ffffff 0%,#fffaf8 100%);
+    border:1px solid var(--line);border-radius:24px;padding:32px 34px 28px;
+    box-shadow:0 18px 50px -28px rgba(214,62,84,.35);
+  }
+  .eyebrow{margin:0 0 10px;font-size:12px;letter-spacing:.14em;font-weight:700;color:var(--red);text-transform:uppercase;}
+  h1{margin:0;font-size:32px;line-height:1.25;letter-spacing:-.01em;}
+  .sub{margin:12px 0 0;font-size:15px;color:var(--ink-2);max-width:640px;}
+  .sub b{color:var(--red-dark);}
+  .hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px;}
+  .hero-tags span{font-size:12px;font-weight:600;color:var(--ink-2);background:#fff;border:1px solid var(--line);padding:5px 12px;border-radius:999px;}
+  .hero-tags span.hot{background:var(--red-soft);border-color:#ffd9df;color:var(--red-dark);}
+
+  /* Toolbar + nav */
+  .toolbar{display:flex;justify-content:flex-end;gap:10px;margin:16px 2px 0;flex-wrap:wrap;}
+  button{font:inherit;font-size:13px;font-weight:600;cursor:pointer;border-radius:999px;padding:8px 16px;border:1px solid var(--line);background:#fff;color:var(--ink-2);transition:.18s;}
+  button:hover{border-color:#ffc9d1;color:var(--red-dark);background:#fff7f8;}
+  button.solid{background:var(--red);border-color:var(--red);color:#fff;}
+  button.solid:hover{background:var(--red-dark);color:#fff;}
+  nav.toc{
+    display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 22px;
+    padding:12px;background:rgba(255,255,255,.75);border:1px solid var(--line);
+    border-radius:14px;position:sticky;top:10px;z-index:20;backdrop-filter:blur(8px);
+  }
+  nav.toc a{
+    font-size:12.5px;font-weight:600;color:var(--ink-2);text-decoration:none;
+    padding:5px 11px;border-radius:999px;background:#faf6f5;border:1px solid transparent;
+  }
+  nav.toc a:hover{color:var(--red-dark);background:var(--red-soft);border-color:#ffd9df;}
+
+  /* Sections */
+  section{margin-bottom:26px;}
+  .sec-head{display:flex;align-items:baseline;gap:12px;margin:0 2px 14px;}
+  .sec-head .idx{font-size:12px;font-weight:800;color:var(--red);letter-spacing:.08em;}
+  .sec-head h2{margin:0;font-size:21px;letter-spacing:-.01em;}
+  .sec-head p{margin:0;margin-left:auto;font-size:12.5px;color:var(--ink-3);}
+
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:22px 24px;margin-bottom:14px;box-shadow:0 10px 30px -26px rgba(40,30,30,.4);
+    break-inside:avoid;page-break-inside:avoid;
+  }
+
+  /* Formula */
+  .formula{display:grid;grid-template-columns:1fr 28px 1fr 28px 1fr;align-items:stretch;gap:6px;margin:6px 0 8px;}
+  .step{background:#fff7f8;border:1px solid #ffe3e7;border-radius:14px;padding:16px 16px 14px;position:relative;}
+  .step .n{position:absolute;top:-11px;left:14px;width:22px;height:22px;border-radius:50%;background:var(--red);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;}
+  .step h4{margin:6px 0 4px;font-size:14.5px;}
+  .step p{margin:0;font-size:12.8px;color:var(--ink-2);line-height:1.6;}
+  .arrow{display:flex;align-items:center;justify-content:center;color:#f0b7c1;font-size:18px;font-weight:700;}
+  .formula-note{margin:12px 0 0;font-size:13px;color:var(--ink-3);}
+  .formula-note b{color:var(--red-dark);}
+
+  /* Compare */
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .compare > div{border-radius:14px;padding:16px 18px;border:1px solid var(--line);}
+  .compare .bad{background:#fafafa;border-color:#e9e5e3;}
+  .compare .good{background:#f7fdfa;border-color:#cdeee0;}
+  .compare .tag{display:inline-block;font-size:11px;font-weight:800;padding:2px 9px;border-radius:999px;margin-bottom:8px;}
+  .compare .bad .tag{background:#efedec;color:#8b8582;}
+  .compare .good .tag{background:var(--green-soft);color:#0e7f57;}
+  .compare p{margin:0;font-size:13.5px;color:var(--ink-2);}
+  .compare ul{margin:8px 0 0;padding-left:18px;font-size:12.5px;color:var(--ink-3);}
+  .compare li{margin:2px 0;}
+
+  /* Opening formulas */
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .mini{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px;}
+  .mini h4{margin:0 0 4px;font-size:14.5px;color:var(--ink);}
+  .mini .lead{font-size:12px;color:var(--red-dark);font-weight:700;margin-bottom:6px;}
+  .mini p{margin:0;font-size:13px;color:var(--ink-2);}
+  .mini .eg{margin-top:8px;padding:9px 11px;background:#fbf8f7;border-radius:9px;font-size:12.5px;color:var(--ink-2);}
+
+  /* Table */
+  .table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:#fff;}
+  table{width:100%;border-collapse:collapse;font-size:13px;min-width:640px;}
+  thead th{background:#fff7f8;color:var(--red-dark);font-size:12px;text-align:left;padding:11px 14px;border-bottom:1px solid #ffe3e7;white-space:nowrap;}
+  tbody td{padding:11px 14px;border-bottom:1px solid #f5efed;color:var(--ink-2);vertical-align:top;}
+  tbody tr:last-child td{border-bottom:none;}
+  tbody td:first-child{color:var(--ink);font-weight:600;}
+  tbody td:nth-child(2){color:var(--red-dark);}
+  tbody tr:hover{background:#fffbfa;}
+
+  /* Scenario */
+  .scenario{padding:0;overflow:hidden;}
+  .scenario-head{display:flex;align-items:center;gap:12px;padding:18px 22px 14px;border-bottom:1px solid #f6f0ee;flex-wrap:wrap;}
+  .letter{width:34px;height:34px;flex:0 0 auto;border-radius:10px;background:var(--red-soft);color:var(--red-dark);font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;}
+  .scenario-head h3{margin:0;font-size:16.5px;}
+  .signal{margin-left:auto;font-size:12px;color:var(--amber);background:var(--amber-soft);padding:4px 10px;border-radius:999px;font-weight:600;}
+  .scenario-body{padding:14px 22px 18px;}
+  .scene-note{margin:0 0 12px;font-size:13px;color:var(--ink-3);}
+  .scene-note b{color:var(--ink-2);}
+
+  .script-block{border:1px solid #f1eae8;border-radius:12px;padding:12px 14px;margin-bottom:10px;background:#fdfcfc;position:relative;}
+  .script-block:last-child{margin-bottom:0;}
+  .sb-head{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
+  .sb-label{font-size:11px;font-weight:800;padding:2px 9px;border-radius:999px;letter-spacing:.02em;}
+  .sb-label.dm{background:var(--red-soft);color:var(--red-dark);}
+  .sb-label.cm{background:#eef4ff;color:#2a5bd7;}
+  .sb-label.eg{background:#f3f1ef;color:#7d7774;}
+  .sb-label.fu{background:var(--green-soft);color:#0e7f57;}
+  .copy{margin-left:auto;font-size:11px;font-weight:600;padding:3px 10px;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--ink-3);cursor:pointer;}
+  .copy:hover{color:var(--red-dark);border-color:#ffc9d1;}
+  .copy.done{color:var(--green);border-color:#bfe8d7;background:#f5fdf9;}
+  .script-block p{margin:0;font-size:13.6px;color:var(--ink);line-height:1.75;}
+  .script-block p + p{margin-top:6px;}
+  .script-block .ph{color:var(--red-dark);font-weight:600;}
+  .script-block small{display:block;margin-top:6px;font-size:12px;color:var(--ink-3);}
+  .tip{margin:0;padding:10px 13px;background:#fffaf0;border-left:3px solid #f3c96b;border-radius:0 9px 9px 0;font-size:12.5px;color:#7a5a12;line-height:1.65;}
+  .tip b{color:#6b4b06;}
+
+  /* Template */
+  .template{background:linear-gradient(150deg,#fffdf6,#fff);border-color:#f3e8cc;}
+  .template .script-block{background:#fffdf6;border-color:#f3e8cc;}
+  .fill{display:inline-block;color:var(--red-dark);font-weight:700;background:#fff0d6;border-radius:5px;padding:0 6px;}
+
+  /* Redline */
+  .redline{border-color:#ffd9df;background:linear-gradient(150deg,#fff9fa,#fff);}
+  .redline ul{margin:0;padding-left:20px;}
+  .redline li{font-size:13.5px;color:var(--ink-2);margin:7px 0;}
+  .redline li b{color:var(--red-dark);}
+  .check3{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px;}
+  .check3 div{background:#fff;border:1px solid #ffe3e7;border-radius:10px;padding:11px 12px;font-size:12.5px;color:var(--ink-2);}
+  .check3 b{display:block;font-size:11px;color:var(--red);margin-bottom:3px;}
+
+  .foot{margin-top:32px;text-align:center;font-size:12px;color:var(--ink-3);}
+
+  @media (max-width:760px){
+    .page{padding:22px 12px 52px;}
+    .hero{padding:22px 20px;border-radius:20px;}
+    h1{font-size:25px;}
+    .formula{grid-template-columns:1fr;gap:14px;}
+    .arrow{transform:rotate(90deg);height:18px;}
+    .compare,.grid-2{grid-template-columns:1fr;}
+    .check3{grid-template-columns:repeat(2,1fr);}
+    .card{padding:18px 16px;}
+    .scenario{padding:0;}
+    .scenario-head{padding:14px 16px 12px;}
+    .scenario-body{padding:12px 16px 16px;}
+    .signal{margin-left:0;}
+    nav.toc{position:static;}
+    .sec-head p{display:none;}
+  }
+  @media print{
+    @page{margin:14mm 12mm;}
+    body{background:#fff;}
+    .page{max-width:100%;padding:0;}
+    .toolbar,nav.toc,.copy{display:none;}
+    .hero,.card,section{box-shadow:none;}
+    .card{padding:14px 16px;margin-bottom:10px;}
+    .scenario{padding:0;}
+    .script-block{background:#fff;page-break-inside:avoid;}
+    a{color:inherit;text-decoration:none;}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="hero">
+    <p class="eyebrow">UK 留学租房 · 前端获客</p>
+    <h1>小红书获客话术大全</h1>
+    <p class="sub">核心只有一条：<b>把学生帖子里的要求点放在第一句</b>。让他一眼看出你认真看过帖子，而不是复制粘贴的通用话术。</p>
+    <div class="hero-tags">
+      <span class="hot">需求点前置</span>
+      <span>私信 / 留评 / 截流</span>
+      <span>10 类场景</span>
+      <span>可复制模板</span>
+      <span>配套日常待办清单</span>
+    </div>
+  </header>
+
+  <div class="toolbar">
+    <button id="copyAllBtn">复制全部话术</button>
+    <button id="printBtn" class="solid">打印 / 导出 PDF</button>
+  </div>
+
+  <nav class="toc">
+    <a href="#principle">核心公式</a>
+    <a href="#opening">5 种开头</a>
+    <a href="#signals">需求识别</a>
+    <a href="#scripts">分场景话术</a>
+    <a href="#followup">回访跟进</a>
+    <a href="#template">填空模板</a>
+    <a href="#redline">发布前自检</a>
+  </nav>
+
+  <!-- 核心公式 -->
+  <section id="principle">
+    <div class="sec-head"><span class="idx">01</span><h2>核心公式：三句话，句句有他</h2><p>先证明看过帖子，再谈房源</p></div>
+    <div class="card">
+      <div class="formula">
+        <div class="step"><span class="n">1</span><h4>复述硬条件</h4><p>第一句必须出现帖子里的 1–2 个具体信息：预算、学校/校区、起租时间、房型、通勤分钟、地标。</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><span class="n">2</span><h4>给对得上的信息</h4><p>只讲一个和他条件直接相关的方案或事实。不铺产品清单，不先夸自己房源多。</p></div>
+        <div class="arrow">→</div>
+        <div class="step"><span class="n">3</span><h4>给低门槛下一步</h4><p>只给一个动作：发实拍、发路线、发对比表、拉群。第一次绝不直接要微信。</p></div>
+      </div>
+      <p class="formula-note"><b>判断标准：</b>把这条私信发给另一个学生，如果完全不违和，说明你写的还是套话。</p>
+    </div>
+
+    <div class="card">
+      <div class="compare">
+        <div class="bad">
+          <span class="tag">通用套话</span>
+          <p>“同学你好，看到你在找 UCL 附近的房子，我们这边有很多优质房源，可以加微信详聊～”</p>
+          <ul>
+            <li>没有复述任何条件</li>
+            <li>信息量为零，像群发</li>
+            <li>第一步就要微信，门槛太高</li>
+          </ul>
+        </div>
+        <div class="good">
+          <span class="tag">需求点前置</span>
+          <p>“预算 300pw 以内、想步行到 UCL 的 studio，我这边有两套对得上：一套 King's Cross 步行 18 分钟、独卫；一套 Euston 通勤 12 分钟但临街。你更在意走路近还是安静？我先发这两套的实拍。”<small></small></p>
+          <ul>
+            <li>数字和条件全部来自他的帖子</li>
+            <li>给了取舍，不是堆房源</li>
+            <li>下一步只是“发实拍”</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 开头公式 -->
+  <section id="opening">
+    <div class="sec-head"><span class="idx">02</span><h2>5 种开头公式</h2><p>按帖子里最醒目的信息选一种</p></div>
+    <div class="grid-2">
+      <div class="mini">
+        <div class="lead">01 数字复述</div>
+        <h4>预算 + 通勤时间</h4>
+        <p>把两个数字拎出来，证明你会算账。</p>
+        <div class="eg">“300pw 以内 + 步行 20 分钟到校区，这个组合我这边有两套能对上。”</div>
+      </div>
+      <div class="mini">
+        <div class="lead">02 地标复述</div>
+        <h4>校区 / 公寓 / 商超</h4>
+        <p>用他提到的地名，而不是泛泛说“学校附近”。</p>
+        <div class="eg">“你说的 Jubilee Campus 附近，我按门到门算了下，这套步行 12 分钟。”</div>
+      </div>
+      <div class="mini">
+        <div class="lead">03 时间复述</div>
+        <h4>起租日 + 租期</h4>
+        <p>短租和转租最在意时间，先把日期对上。</p>
+        <div class="eg">“9 月 15 号起租、只住到 12 月，这个租期我有两类方案能接。”</div>
+      </div>
+      <div class="mini">
+        <div class="lead">04 取舍复述</div>
+        <h4>两个条件互相打架</h4>
+        <p>点出他的矛盾，显得你真的在替他筛。</p>
+        <div class="eg">“又要独卫又想压预算，筛选范围会小很多，我按优先级帮你排一下。”</div>
+      </div>
+      <div class="mini">
+        <div class="lead">05 对比复述</div>
+        <h4>在 A 和 B 之间纠结</h4>
+        <p>接住他的纠结，而不是重新推一套。</p>
+        <div class="eg">“你已经在 A 和 B 之间选了，说明预算和位置都锁定了，主要差在通勤和安静。”</div>
+      </div>
+      <div class="mini">
+        <div class="lead">禁用开头</div>
+        <h4>这些话不要出现在第一句</h4>
+        <p>“同学你好，看到你在找房” · “我们这边房源很多” · “方便加个微信吗” · “私信你了”</p>
+        <div class="eg">共同问题：没有他的任何信息，学生一秒判定是群发。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 需求识别 -->
+  <section id="signals">
+    <div class="sec-head"><span class="idx">03</span><h2>需求点识别速查表</h2><p>看到这些信号，第一句就这么接</p></div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>帖子信号</th><th>他真正在意的</th><th>第一句怎么接（需求点前置）</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>标题带「急转 / 短租」+ 起止日期</td><td>时间和确定性</td><td>“X 月 X 号起、租到 X 月，时间上正好能对上，我这边有两类方案……”</td></tr>
+          <tr><td>写明预算 / 「学生党」</td><td>绝不超预算</td><td>“预算 X 以内还要……，这个范围我按价格从低到高给你筛。”</td></tr>
+          <tr><td>「步行到 XX 学校」</td><td>通勤与安全</td><td>“步行 X 分钟内到 XX，我按门到门算过，这套是 X 分钟。”</td></tr>
+          <tr><td>「studio / ensuite / 独卫」</td><td>隐私与生活习惯</td><td>“不想共用卫浴，那基本就是 studio 或带独卫的 ensuite……”</td></tr>
+          <tr><td>「可养宠 / 双人入住」</td><td>特殊准入条件</td><td>“带宠物 / 两个人住，能选的公寓会少一些，我先按这个条件筛……”</td></tr>
+          <tr><td>「找室友 / 拼 2b」</td><td>室友匹配度</td><td>“你写的是 XX 学校、X 月入住、想找女生室友，我这边正好有同校同时段的……”</td></tr>
+          <tr><td>「XX 公寓怎么样 / 求避雷」</td><td>决策信息</td><td>“你在纠结 XX 公寓，主要顾虑是隔音还是到校区距离？”</td></tr>
+          <tr><td>「新生 / 求组织」</td><td>归属感与信息</td><td>“27fall XX 学校的组织，里面同专业的同学挺多……”</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 分场景话术 -->
+  <section id="scripts">
+    <div class="sec-head"><span class="idx">04</span><h2>分场景话术</h2><p>私信版 + 留评版 + 提醒</p></div>
+
+    <!-- A 预算型 -->
+    <article class="card scenario">
+      <div class="scenario-head">
+        <span class="letter">A</span><h3>预算型帖子</h3>
+        <span class="signal">信号：明确写“X pw 以内”“预算有限”</span>
+      </div>
+      <div class="scenario-body">
+        <p class="scene-note">他最先划掉的就是超预算的房源，所以第一句先把预算复述出来，再给“在预算内但需要取舍”的方案。</p>
+        <div class="script-block">
+          <div class="sb-head"><span class="sb-label dm">私信版</span><button class="copy">复制</button></div>
+          <p>“预算 <span class="ph">250pw</span> 以内、还要能步行到 <span class="ph">XX 学校</span>，这个组合确实不多。我手上能对上的是一套合租单间，<span class="ph">£2XX/周含 bill</span>，步行 15 分钟到校区，缺点是厨房共用。你能接受合租吗？能的话我把房间实拍和室友情况发你。”</p>
+        </div>
+        <div class="script-block">
+          <div class="sb-head"><span class="sb-label cm">留评版</span><button class="copy">复制</button></div>
+          <p>“<span class="ph">250pw</span> 以内 + 步行到 <span class="ph">XX</span> 的房源不多，我这有一套合租单间刚好在预算内，私你实拍看看？”</p>
+        </div>
+        <p class="tip"><b>提醒：</b>不要为了成交先推超预算的房源。先说“这个预算需要接受什么”，信任感反而更高。</p>
+      </div>
+    </article>
+
+    <!-- B 通勤型 -->
+    <article class="card scenario">
+      <div class="scenario-head">
+        <span class="letter">B</span><h3>通勤 / 位置型帖子</h3>
+        <span class="signal">信号：“步行到学校”“离地铁近”“不想坐公交”</span>
+      </div>
+      <div class="scenario-body">
+        <p class="scene-note">通勤型学生最怕中介嘴上说“很近”。用分钟数和路线证明，而不是形容词。</p>
+        <div class="script-block">
+          <div class="sb-head"><span class="sb-label dm">私信版</span><button class="copy">复制</button></div>
+          <p>“你说的步行 20 分钟内到 <span class="ph">UCL</span>，我按门到门算了下：A 公寓步行 18 分钟，B 公寓地铁 12 分钟但要换乘。你更想全程走路，还是接受地铁？我把两条路线截图发你，你自己感受下距离。”</p>
+        </div>
+        <div class="script-block">
+          <div class="sb-head"><span class="sb-label cm">留评版</span><button class="copy">复制</button></div>
+          <p>“步行 18 分钟到 <span class="ph">UCL</span> 这个距离我这边正好有对应房源，私你路线图～”</p>
+        </div>
+        <p class="tip"><b>提醒：</b>把“步行 / 地铁 / 公交”的分钟数分开写，别用“交通便利”四个字糊过去。</p>
+      </div>
+    </article>
+
+    <!-- C 短租转租 -->
+    <article class="card scenario">
+      <div class="scenario-head">
+        <span class="letter">C</span><h3>短租 / 转租型帖子</h3>
+        <span class="signal">信号：“急转”“只租 X 个月”“X 月起租”</span>
+      </div>
+      <div class="scenario-body">
+        <p class="scene-note">这类学生最怕“聊半天结果租期接不上”。第一句就把日期对上，比任何介绍都有效。</p>
+        <div class="script-block">
+          <div class="sb-head"><span class="sb-label dm">私信版</span><button class="copy">复制</button></div>
+          <p>“<span class="ph">9 月 15 号</span>起租、只住到 <span class="ph">12 月</span>，这个租期大部分公寓不接，我这边有两类方案：官方短租和学长转租。你更在意价格，还是能开发票 / 走正规合同？我先按你的优先级筛，不合适的直接排除。”</p>
+        </div>
+        <div class="script-block">
+          <div class="sb-head"><span class="sb-label cm">留评版</span><button class="copy">复制</button></div>
+          <p>“<span class="ph">9–12 月</span>这个租期我有转租资源，私你细节？”</p>
+        </div>
+        <p class="tip"><b>提醒：</b>转租一定先确认能否走官方合同、押金怎么处理，别为了快而模糊带过。</p>
+      </div>
+    </article>
+
+    <!-- D 房型设施 -->
+    <article class="card scenario">
+      <div class="scenario-head">
+        <span class="letter">D</span><h3>房型 / 设施型帖子</h3>
+        <span class="signal">信号：“studio”“独卫”“能做饭”“双人入住”“可养宠”</span>
+      </div>
+      <div class="scenario-body">
+        <p class="scene-note">硬性设施是筛选项，不是卖点。先确认他的硬条件，再谈价格，顺序不能反。</p>
+        <div class="script-block">
+          <div class="sb-head"><span class="sb-label dm">私信版</span><button class="copy">复制</button></div>
+          <p>“不想共用卫浴 + 要能自己做饭，那基本就是 studio 或带厨房的 ensuite。你预算大概多少？我按『独卫 + 可做饭 + 到 <span class="ph">XX 学校</span>通勤』三个条件一起筛，避免给你推超预算的。”</p>
+        </div>
+        <div class="script-block">
+          <div class="sb-head"><span class="sb-label cm">留评版</span><button class="copy">复制</button></div>
+          <p>“独卫 + 能做饭，我这边有 studio 对得上，私你看户型？”</p>
+        </div>
+        <p class="tip"><b>提醒：</b>“可养宠”“双人入住”属于稀缺条件，先确认公寓政策再承诺，避免后面翻车。</p>
+      </div>
+    </article>
+
+    <!-- E 拼室友 -->
+    <article class="card scenario">
+      <div class="scenario-head">
+        <span class="letter">E</span><h3>拼室友 / 找室友型帖子</h3>
+        <span class="signal">信号：“找女生室友”“同校拼 2b”“作息规律”</span>
+      </div>
+      <div class="scenario-body">
+        <p class="scene-note">拼室友的核心不是房源，是“人能不能合得来”。先复述他的室友条件，再谈房子。</p>
+        <div class="script-block">
+          <div class="sb-head"><span class="sb-label dm">私信版</span><button class="copy">复制</button></div>
+          <p>“你写的是 <span class="ph">XX 学校</span>、<span class="ph">X 月</span>入住、想找女生室友，我这边正好有同校同时间段的同学在拼 2b。你们作息要求对得上吗？对得上我拉个小群先认识一下，房子可以后面一起看。”</p>
+        </div>
+        <div class="script-block">
+          <div class="sb-head"><span class="sb-label cm">留评版</span><button class="copy">复制</button></div>
+          <p>“同校 <span class="ph">X 月</span>入住拼室友，我这边有匹配的同学，私你？”</p>
+        </div>
+        <p class="tip"><b>提醒：</b>先拉小群认识、再谈房，成交率和口碑都比硬推房源好。</p>
+      </div>
+    </article>
+
+    <!-- F 新生组织 -->
+    <article class="card scenario">
+      <div class="scenario-head">
+        <span class="letter">F</span><h3>新生 / 求组织型帖子</h3>
+        <span class="signal">信号：“27fall”“求组织”“找搭子”“求学姐”</span>
+      </div>
+      <div class="scenario-body">
+        <p class="scene-note">新生要的是归属感，不是房源。先给组织价值，再自然过渡到租房。</p>
+        <div class="script-block">
+          <div class="sb-head"><span class="sb-label dm">私信版</span><button class="copy">复制</button></div>
+          <p>“27fall <span class="ph">XX 学校</span>的组织要来吗？里面同专业的同学挺多，可以找搭子、问选课和租房。要进的话我拉你，进群先看看氛围，不合适也没关系。”</p>
+        </div>
+        <div class="script-block">
+          <div class="sb-head"><span class="sb-label cm">留评版</span><button class="copy">复制</button></div>
+          <p>“27fall <span class="ph">XX 学校</span>组织，要进可 dd～”</p>
+        </div>
+        <p class="tip"><b>提醒：</b>可用群列表 / 群聊截图增强真实感，但务必打码同学昵称和头像。</p>
+      </div>
+    </article>
+
+    <!-- G 求推荐避雷 -->
+    <article class="card scenario">
+      <div class="scenario-head">
+        <span class="letter">G</span><h3>求推荐 / 求避雷型帖子</h3>
+        <span class="signal">信号：“XX 公寓怎么样”“求避雷”“哪个好”</span>
+      </div>
+      <div class="scenario-body">
+        <p class="scene-note">他已经在做决策，不需要你再推一套新房，而是帮他把纠结点说清楚。</p>
+        <div class="script-block">
+          <div class="sb-head"><span class="sb-label dm">私信版</span><button class="copy">复制</button></div>
+          <p>“你在纠结 <span class="ph">XX 公寓</span>，主要顾虑是隔音还是到校区距离？这两个点我这边都有实际反馈：隔音一般但位置好，另一套正好反过来。你更在意哪个？我按你的取舍发对比，不硬推。”</p>
+        </div>
+        <div class="script-block">
+          <div class="sb-head"><span class="sb-label cm">留评版</span><button class="copy">复制</button></div>
+          <p>“<span class="ph">XX 公寓</span>的优缺点我整理了一版，私你？”</p>
+        </div>
+        <p class="tip"><b>提醒：</b>讲缺点要具体（隔音、临街、距离），但别贬低同行、别编造负面。</p>
+      </div>
+    </article>
+
+    <!-- H 对比纠结 -->
+    <article class="card scenario">
+      <div class="scenario-head">
+        <span class="letter">H</span><h3>已看房 / 两套纠结型帖子</h3>
+        <span class="signal">信号：“A 和 B 选哪个”“已经看了几套”</span>
+      </div>
+      <div class="scenario-body">
+        <p class="scene-note">不要重新推第三套。先复述他纠结的两个选项，再给一个判断维度。</p>
+        <div class="script-block">
+          <div class="sb-head"><span class="sb-label dm">私信版</span><button class="copy">复制</button></div>
+          <p>“你已经在 <span class="ph">A</span> 和 <span class="ph">B</span> 之间选了，说明预算和位置都锁定了。A 的优势是 <span class="ph">XX</span>，B 是 <span class="ph">XX</span>；如果你更在意 <span class="ph">Z</span>，我会选 B。你现在最纠结的是哪一点？我帮你把这一点确认掉。”</p>
+        </div>
+        <div class="script-block">
+          <div class="sb-head"><span class="sb-label cm">留评版</span><button class="copy">复制</button></div>
+          <p>“A 和 B 我这边都有实际入住反馈，私你对比一下？”</p>
+        </div>
+        <p class="tip"><b>提醒：</b>给建议而不是替他决定，最后一句一定要把选择权还给他。</p>
+      </div>
+    </article>
+
+    <!-- I 公开留评 -->
+    <article class="card scenario">
+      <div class="scenario-head">
+        <span class="letter">I</span><h3>公开留评截流</h3>
+        <span class="signal">用在别人的求租帖 / 求助帖下</span>
+      </div>
+      <div class="scenario-body">
+        <p class="scene-note">评论区只做两件事：对上他的条件 + 留一个钩子。不写价格细节，不留微信。</p>
+        <div class="script-block">
+          <div class="sb-head"><span class="sb-label cm">留评示例</span><button class="copy">复制</button></div>
+          <p>“<span class="ph">预算 / 位置</span>和我手上这套对得上，私你实拍和价格～”</p>
+          <p>“同校同租期，我这有匹配的房源 / 室友，dd 我发你。”</p>
+          <p>“你说的 <span class="ph">步行 15 分钟到校区</span>，我这边有套正好在这个距离，私你路线？”</p>
+        </div>
+        <p class="tip"><b>提醒：</b>不要复制同一句评论刷多个帖子；被平台判定营销会限流。评论里不出现“加V”“微信”“看我主页”。</p>
+      </div>
+    </article>
+
+    <!-- J 私信截流 -->
+    <article class="card scenario">
+      <div class="scenario-head">
+        <span class="letter">J</span><h3>私信截流（针对帖子）</h3>
+        <span class="signal">用在已确认有真实需求的学生</span>
+      </div>
+      <div class="scenario-body">
+        <p class="scene-note">不要用“看到你发的帖子”当开头——那不是需求点。直接把帖子里的条件写进第一句。</p>
+        <div class="script-block">
+          <div class="sb-head"><span class="sb-label dm">私信版</span><button class="copy">复制</button></div>
+          <p>“<span class="ph">X 月入住、预算 X、要独卫</span>，这三个条件我这边有一套正好对上，<span class="ph">£X/周</span>，到 <span class="ph">XX 学校</span>步行 12 分钟。先发你实拍和户型，不合适也没关系。”</p>
+        </div>
+        <p class="tip"><b>提醒：</b>先按「时效性 + 真实需求 + 租期预算位置」筛一遍再发；素人号 10 条/天、KOS 20 条/天，别浪费在同行帖上。</p>
+      </div>
+    </article>
+  </section>
+
+  <!-- 回访跟进 -->
+  <section id="followup">
+    <div class="sec-head"><span class="idx">05</span><h2>回访与群内跟进</h2><p>加上微信之后，话术才真正开始</p></div>
+
+    <article class="card scenario">
+      <div class="scenario-head"><span class="letter">K</span><h3>加微信后的首次破冰</h3><span class="signal">刚通过好友</span></div>
+      <div class="scenario-body">
+        <div class="script-block">
+          <div class="sb-head"><span class="sb-label fu">跟进话术</span><button class="copy">复制</button></div>
+          <p>“刚加你微信，先不给你发房源轰炸。你之前说的三个条件我记下了：预算 <span class="ph">X</span>、<span class="ph">X 月</span>入住、步行到 <span class="ph">XX</span>。我这周按这三个条件筛，有对得上的先发你 2 套，不合适直接说。”</p>
+        </div>
+        <p class="tip"><b>提醒：</b>先复述条件 = 证明你记住了他。比“有什么可以帮你”有效十倍。</p>
+      </div>
+    </article>
+
+    <article class="card scenario">
+      <div class="scenario-head"><span class="letter">L</span><h3>3–7 天后二次跟进</h3><span class="signal">客户未回复 / 还在观望</span></div>
+      <div class="scenario-body">
+        <div class="script-block">
+          <div class="sb-head"><span class="sb-label fu">跟进话术</span><button class="copy">复制</button></div>
+          <p>“上次说的 <span class="ph">XX 公寓</span>这周放了几间 <span class="ph">X 月</span>的房，价格在 <span class="ph">£X–X</span>，和你预算对得上。要我把楼层和朝向发你吗？或者你已经有别的选择了，也跟我说一声，我就不重复打扰。”</p>
+        </div>
+        <p class="tip"><b>提醒：</b>每次跟进都要带一个新信息（新房源、价格变化、截止时间），不要只发“在吗”。</p>
+      </div>
+    </article>
+
+    <article class="card scenario">
+      <div class="scenario-head"><span class="letter">M</span><h3>沉默客户唤醒</h3><span class="signal">长期不回消息</span></div>
+      <div class="scenario-body">
+        <div class="script-block">
+          <div class="sb-head"><span class="sb-label fu">跟进话术</span><button class="copy">复制</button></div>
+          <p>“你之前关注的是 <span class="ph">XX 学校</span>附近、<span class="ph">X 月</span>入住，现在时间更近了。我这边新出两套在预算内的，其中一套步行 <span class="ph">X 分钟</span>。还需要的话我发你；如果已经定好了也告诉我一声，恭喜你～”</p>
+        </div>
+        <p class="tip"><b>提醒：</b>给台阶、不施压。明确说“不需要我就不打扰”，反而更容易收到回复。</p>
+      </div>
+    </article>
+
+    <article class="card scenario">
+      <div class="scenario-head"><span class="letter">N</span><h3>拉群后同步顾问 / 群内立人设</h3><span class="signal">建群第一分钟</span></div>
+      <div class="scenario-body">
+        <div class="script-block">
+          <div class="sb-head"><span class="sb-label fu">群内话术</span><button class="copy">复制</button></div>
+          <p>“@<span class="ph">同学</span> 这位是 <span class="ph">XX 顾问</span>，专门负责 <span class="ph">XX 区域</span>。你的需求我已经同步了：<span class="ph">XX 学校、X 月入住、预算 X、要独卫</span>。顾问老师会按这个给你筛，不会推超预算的。”</p>
+          <p>“大家有问题直接在群里问，租房、选课、找室友都可以，看到都会回～”</p>
+        </div>
+        <p class="tip"><b>提醒：</b>先替顾问立住“专业靠谱”人设，再让顾问开口，破冰会顺很多。</p>
+      </div>
+    </article>
+
+    <article class="card scenario">
+      <div class="scenario-head"><span class="letter">O</span><h3>每周一大回访</h3><span class="signal">按城市 / 学校标签群发</span></div>
+      <div class="scenario-body">
+        <div class="script-block">
+          <div class="sb-head"><span class="sb-label fu">回访话术</span><button class="copy">复制</button></div>
+          <p>“周一大回访～你之前看的是 <span class="ph">XX 区域</span>，这周新上了 <span class="ph">X 套</span>，其中一套价格比之前低 <span class="ph">£X</span>。还想看的话我发你；如果已经定好了也跟我说一声，我就不打扰啦。”</p>
+        </div>
+        <div class="script-block">
+          <div class="sb-head"><span class="sb-label fu">回访内容库</span><button class="copy">复制</button></div>
+          <p>热门房源推荐 / 拼室友匹配 / 活动策划 / 询问最新租房需求。</p>
+        </div>
+        <p class="tip"><b>提醒：</b>按城市、学校维度打标签再群发，避免把伦敦的房源发给利兹的学生。</p>
+      </div>
+    </article>
+  </section>
+
+  <!-- 填空模板 -->
+  <section id="template">
+    <div class="sec-head"><span class="idx">06</span><h2>通用填空模板</h2><p>任何帖子都能套，但必须填满括号</p></div>
+    <div class="card template">
+      <div class="script-block">
+        <div class="sb-head"><span class="sb-label eg">模板 1 · 条件对得上</span><button class="copy">复制</button></div>
+        <p>“<span class="fill">X 月入住</span>、<span class="fill">预算 X 以内</span>、<span class="fill">要独卫</span>——这三个条件我这边有一套正好对上，<span class="fill">£X/周</span>。先发你实拍和户型，不合适也没关系。”</p>
+      </div>
+      <div class="script-block">
+        <div class="sb-head"><span class="sb-label eg">模板 2 · 需要取舍</span><button class="copy">复制</button></div>
+        <p>“你说的『<span class="fill">步行到 XX 学校</span>』我按门到门算过，这套是 <span class="fill">X 分钟</span>。你更在意近，还是安静？我按你的选择再筛，不给你堆一堆用不上的。”</p>
+      </div>
+      <div class="script-block">
+        <div class="sb-head"><span class="sb-label eg">模板 3 · 时间紧</span><button class="copy">复制</button></div>
+        <p>“<span class="fill">X 月 X 号</span>起租、只住到 <span class="fill">X 月</span>，时间上我这边能接。你更在意价格，还是合同正规？我先按这个优先级帮你排，今天就能给你两套对比。”</p>
+      </div>
+      <div class="script-block">
+        <div class="sb-head"><span class="sb-label eg">模板 4 · 拼室友</span><button class="copy">复制</button></div>
+        <p>“你写的是 <span class="fill">XX 学校</span>、<span class="fill">X 月</span>入住、想找 <span class="fill">女生</span>室友，我这边有同校同时段的同学。你们作息对得上吗？对得上我先拉个小群，房子后面一起看。”</p>
+      </div>
+      <p class="tip"><b>注意：</b>括号里的内容必须来自帖子或对话，不能凭感觉填。填不满，就说明你还没看懂他的需求，先别发。</p>
+    </div>
+  </section>
+
+  <!-- 发布前自检 -->
+  <section id="redline">
+    <div class="sec-head"><span class="idx">07</span><h2>发布前 4 秒自检</h2><p>一条不过，就重写</p></div>
+    <div class="card redline">
+      <div class="check3">
+        <div><b>CHECK 1</b>有没有出现他帖子里的 1 个具体条件？（数字 / 地名 / 日期）</div>
+        <div><b>CHECK 2</b>有没有一句只属于他、换个人就不成立的话？</div>
+        <div><b>CHECK 3</b>下一步是不是只有一个动作，且门槛足够低？</div>
+        <div><b>CHECK 4</b>有没有超预算、超范围硬推，或第一句就要微信？</div>
+      </div>
+      <ul style="margin-top:16px;">
+        <li><b>先筛后发：</b>时效性 → 真实需求 → 租期 / 预算 / 位置，四项都过再私信。</li>
+        <li><b>甄别同行：</b>IP 跳动（疑似梯子）、主页内容异常、IP 集中在河南 / 河北 / 天津 / 广东的，谨慎私信。</li>
+        <li><b>私信上限：</b>素人号 10 条 / 天，KOS 20 条 / 天，把额度留给真实客户。</li>
+        <li><b>不硬承诺：</b>价格、房态、能否养宠 / 双人入住，一律以系统与公寓政策为准。</li>
+        <li><b>公开评论区：</b>不留微信、手机号，不刷重复评论。</li>
+        <li><b>时间节点：</b>所有获客动作在 18:00 质检前完成。</li>
+      </ul>
+    </div>
+  </section>
+
+  <p class="foot">配套《小红书运营每日待办清单》使用 · 示例中的价格与房源请按实际系统替换</p>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  function copyText(text){
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      return navigator.clipboard.writeText(text);
+    }
+    return new Promise(function(resolve, reject){
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      try{
+        document.execCommand("copy");
+        resolve();
+      }catch(e){
+        reject(e);
+      }finally{
+        document.body.removeChild(ta);
+      }
+    });
+  }
+
+  function blockText(block){
+    var parts = [];
+    block.querySelectorAll("p").forEach(function(p){
+      parts.push(p.textContent.trim());
+    });
+    return parts.join("\n");
+  }
+
+  document.querySelectorAll(".copy").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var block = btn.closest(".script-block");
+      if(!block) return;
+      copyText(blockText(block)).then(function(){
+        var old = btn.textContent;
+        btn.textContent = "已复制";
+        btn.classList.add("done");
+        setTimeout(function(){
+          btn.textContent = old;
+          btn.classList.remove("done");
+        }, 1600);
+      }).catch(function(){
+        btn.textContent = "复制失败";
+        setTimeout(function(){ btn.textContent = "复制"; }, 1600);
+      });
+    });
+  });
+
+  var copyAllBtn = document.getElementById("copyAllBtn");
+  copyAllBtn.addEventListener("click", function(){
+    var out = [];
+    document.querySelectorAll("#scripts .script-block, #followup .script-block, #template .script-block").forEach(function(block){
+      var label = block.querySelector(".sb-label");
+      var head = label ? "【" + label.textContent.trim() + "】" : "";
+      out.push(head + "\n" + blockText(block));
+    });
+    copyText(out.join("\n\n")).then(function(){
+      copyAllBtn.textContent = "已复制全部";
+      setTimeout(function(){ copyAllBtn.textContent = "复制全部话术"; }, 1600);
+    });
+  });
+
+  document.getElementById("printBtn").addEventListener("click", function(){ window.print(); });
+})();
+</script>
+</body>
+</html>
